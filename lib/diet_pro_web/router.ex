@@ -18,6 +18,12 @@ defmodule DietProWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/foods", FoodLive.Index, :index
+    live "/foods/new", FoodLive.Index, :new
+    live "/foods/:id/edit", FoodLive.Index, :edit
+
+    live "/foods/:id", FoodLive.Show, :show
+    live "/foods/:id/show/edit", FoodLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
