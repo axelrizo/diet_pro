@@ -18,7 +18,9 @@ defmodule DietPro.Diets do
 
   """
   def list_foods do
-    Repo.all(Food)
+    Food
+    |> Repo.all()
+    |> Enum.map(&Food.put_calories/1)
   end
 
   @doc """
