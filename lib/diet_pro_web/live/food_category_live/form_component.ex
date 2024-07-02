@@ -20,7 +20,6 @@ defmodule DietProWeb.FoodCategoryLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:f]} type="text" label="F" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Food category</.button>
         </:actions>

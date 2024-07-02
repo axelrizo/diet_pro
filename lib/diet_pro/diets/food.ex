@@ -18,7 +18,7 @@ defmodule DietPro.Diets.Food do
   @doc false
   def changeset(food, attrs) do
     food
-    |> cast(attrs, [:name, :protein, :fat, :carbohydrate])
+    |> cast(attrs, [:name, :protein, :fat, :carbohydrate, :food_category_id])
     |> validate_required([:name, :protein, :fat, :carbohydrate])
   end
 
