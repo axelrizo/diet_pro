@@ -13,6 +13,8 @@
   <:item title="Protein"><%= @food.protein %></:item>
   <:item title="Fat"><%= @food.fat %></:item>
   <:item title="Carbohydrate"><%= @food.carbohydrate %></:item>
+  <:item title="Calories"><%= @food.calories %></:item>
+  <:item title="Food Category"><%= @food.food_category.name %></:item>
 </.list>
 
 <.back navigate={~p"/foods"}>Back to foods</.back>
@@ -25,5 +27,6 @@
     action={@live_action}
     food={@food}
     patch={~p"/foods/#{@food}"}
+    food_categories={@food_categories |> Enum.map(&{&1.name, &1.id})}
   />
 </.modal>

@@ -6,7 +6,12 @@ defmodule DietProWeb.FoodLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :foods, Diets.list_foods())}
+    socket =
+      socket
+      |> stream(:foods, Diets.list_foods())
+      |> assign(:food_categories, Diets.list_food_categories())
+
+    {:ok, socket}
   end
 
   @impl true
@@ -34,7 +39,14 @@ defmodule DietProWeb.FoodLive.Index do
 
   @impl true
   def handle_info({DietProWeb.FoodLive.FormComponent, {:saved, food}}, socket) do
-    {:noreply, stream_insert(socket, :foods, food)}
+    food =
+      food
+      |> Food.put_calories()
+      |> DietPro.Repo.preload(:food_category)
+
+    socket = stream_insert(socket, :foods, food)
+
+    {:noreply, socket}
   end
 
   @impl true

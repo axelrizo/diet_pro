@@ -5,6 +5,10 @@ defmodule DietProWeb.FoodLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
+    socket =
+      socket
+      |> assign(:food_categories, Diets.list_food_categories())
+
     {:ok, socket}
   end
 

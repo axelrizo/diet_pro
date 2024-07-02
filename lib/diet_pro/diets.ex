@@ -19,6 +19,7 @@ defmodule DietPro.Diets do
   """
   def list_foods do
     Food
+    |> preload(:food_category)
     |> Repo.all()
     |> Enum.map(&Food.put_calories/1)
   end
@@ -37,7 +38,12 @@ defmodule DietPro.Diets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_food!(id), do: Repo.get!(Food, id)
+  def get_food!(id) do
+    Food
+    |> preload(:food_category)
+    |> Repo.get!(id)
+    |> Food.put_calories()
+  end
 
   @doc """
   Creates a food.

@@ -17,6 +17,7 @@
   <:col :let={{_id, food}} label="Fat"><%= food.fat %></:col>
   <:col :let={{_id, food}} label="Carbohydrate"><%= food.carbohydrate %></:col>
   <:col :let={{_id, food}} label="Calories"><%= food.calories %></:col>
+  <:col :let={{_id, food}} label="Food category"><%= food.food_category.name %></:col>
   <:action :let={{_id, food}}>
     <div class="sr-only">
       <.link navigate={~p"/foods/#{food}"}>Show</.link>
@@ -40,6 +41,7 @@
     title={@page_title}
     action={@live_action}
     food={@food}
+    food_categories={@food_categories |> Enum.map(&{&1.name, &1.id})}
     patch={~p"/foods"}
   />
 </.modal>

@@ -23,6 +23,12 @@ defmodule DietProWeb.FoodLive.FormComponent do
         <.input field={@form[:protein]} type="number" label="Protein" step="any" />
         <.input field={@form[:fat]} type="number" label="Fat" step="any" />
         <.input field={@form[:carbohydrate]} type="number" label="Carbohydrate" step="any" />
+        <.input
+          field={@form[:food_category_id]}
+          type="select"
+          label="Category"
+          options={@food_categories}
+        />
         <:actions>
           <.button phx-disable-with="Saving...">Save Food</.button>
         </:actions>
