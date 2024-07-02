@@ -6,6 +6,8 @@ defmodule DietPro.Diets.FoodCategory do
     field :name, :string
 
     timestamps(type: :utc_datetime)
+
+    has_many :foods, DietPro.Diets.Food
   end
 
   @doc false

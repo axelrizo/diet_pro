@@ -1,4 +1,5 @@
 defmodule DietPro.Diets.Food do
+  alias DietPro.Diets.FoodCategory
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -10,6 +11,8 @@ defmodule DietPro.Diets.Food do
     field :calories, :float, virtual: true
 
     timestamps(type: :utc_datetime)
+
+    belongs_to :food_category, FoodCategory
   end
 
   @doc false
