@@ -20,4 +20,19 @@ defmodule DietPro.DietsFixtures do
 
     food
   end
+
+  @doc """
+  Generate a food_category.
+  """
+  def food_category_fixture(attrs \\ %{}) do
+    {:ok, food_category} =
+      attrs
+      |> Enum.into(%{
+        f: "some f",
+        name: "some name"
+      })
+      |> DietPro.Diets.create_food_category()
+
+    food_category
+  end
 end

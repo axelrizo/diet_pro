@@ -62,4 +62,60 @@ defmodule DietPro.DietsTest do
       assert %Ecto.Changeset{} = Diets.change_food(food)
     end
   end
+
+  describe "food_categories" do
+    alias DietPro.Diets.FoodCategory
+
+    import DietPro.DietsFixtures
+
+    @invalid_attrs %{f: nil, name: nil}
+
+    test "list_food_categories/0 returns all food_categories" do
+      food_category = food_category_fixture()
+      assert Diets.list_food_categories() == [food_category]
+    end
+
+    test "get_food_category!/1 returns the food_category with given id" do
+      food_category = food_category_fixture()
+      assert Diets.get_food_category!(food_category.id) == food_category
+    end
+
+    test "create_food_category/1 with valid data creates a food_category" do
+      valid_attrs = %{f: "some f", name: "some name"}
+
+      assert {:ok, %FoodCategory{} = food_category} = Diets.create_food_category(valid_attrs)
+      assert food_category.f == "some f"
+      assert food_category.name == "some name"
+    end
+
+    test "create_food_category/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Diets.create_food_category(@invalid_attrs)
+    end
+
+    test "update_food_category/2 with valid data updates the food_category" do
+      food_category = food_category_fixture()
+      update_attrs = %{f: "some updated f", name: "some updated name"}
+
+      assert {:ok, %FoodCategory{} = food_category} = Diets.update_food_category(food_category, update_attrs)
+      assert food_category.f == "some updated f"
+      assert food_category.name == "some updated name"
+    end
+
+    test "update_food_category/2 with invalid data returns error changeset" do
+      food_category = food_category_fixture()
+      assert {:error, %Ecto.Changeset{}} = Diets.update_food_category(food_category, @invalid_attrs)
+      assert food_category == Diets.get_food_category!(food_category.id)
+    end
+
+    test "delete_food_category/1 deletes the food_category" do
+      food_category = food_category_fixture()
+      assert {:ok, %FoodCategory{}} = Diets.delete_food_category(food_category)
+      assert_raise Ecto.NoResultsError, fn -> Diets.get_food_category!(food_category.id) end
+    end
+
+    test "change_food_category/1 returns a food_category changeset" do
+      food_category = food_category_fixture()
+      assert %Ecto.Changeset{} = Diets.change_food_category(food_category)
+    end
+  end
 end

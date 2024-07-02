@@ -1,0 +1,42 @@
+<.header>
+  Listing Food categories
+  <:actions>
+    <.link patch={~p"/food_categories/new"}>
+      <.button>New Food category</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="food_categories"
+  rows={@streams.food_categories}
+  row_click={fn {_id, food_category} -> JS.navigate(~p"/food_categories/#{food_category}") end}
+>
+  <:col :let={{_id, food_category}} label="Name"><%= food_category.name %></:col>
+  <:col :let={{_id, food_category}} label="F"><%= food_category.f %></:col>
+  <:action :let={{_id, food_category}}>
+    <div class="sr-only">
+      <.link navigate={~p"/food_categories/#{food_category}"}>Show</.link>
+    </div>
+    <.link patch={~p"/food_categories/#{food_category}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, food_category}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: food_category.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="food_category-modal" show on_cancel={JS.patch(~p"/food_categories")}>
+  <.live_component
+    module={DietProWeb.FoodCategoryLive.FormComponent}
+    id={@food_category.id || :new}
+    title={@page_title}
+    action={@live_action}
+    food_category={@food_category}
+    patch={~p"/food_categories"}
+  />
+</.modal>

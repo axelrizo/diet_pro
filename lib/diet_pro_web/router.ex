@@ -24,6 +24,13 @@ defmodule DietProWeb.Router do
 
     live "/foods/:id", FoodLive.Show, :show
     live "/foods/:id/show/edit", FoodLive.Show, :edit
+
+    live "/food_categories", FoodCategoryLive.Index, :index
+    live "/food_categories/new", FoodCategoryLive.Index, :new
+    live "/food_categories/:id/edit", FoodCategoryLive.Index, :edit
+
+    live "/food_categories/:id", FoodCategoryLive.Show, :show
+    live "/food_categories/:id/show/edit", FoodCategoryLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
